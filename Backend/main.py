@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import datetime
+from data import load_datasets
 
 x = datetime.datetime.now()
 
@@ -20,6 +21,7 @@ def get_time():
         "Date":x, 
         "programming":"python"
         }
+
 # POST Endpoint =============================================================================
 @app.route('/post_endpoint', methods=['POST'])
 def create_data():
