@@ -4,9 +4,7 @@ import datetime
 
 x = datetime.datetime.now()
 
-# Declare the APP server instance
 app = Flask(__name__)
-# Enable CORS policies
 CORS(app)
 
 # GET Endpoint =============================================================================
