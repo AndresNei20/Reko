@@ -2,9 +2,9 @@ import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 import { Intro } from '../screens/Intro'
 import { Questionnaire } from '../screens/Questionnaire'
 import { Recommendation } from '../screens/Recommendation'
+import PropTypes from 'prop-types'
 
-
-export const Router = () => {
+export const Router = ({recommendations, setRecommendations, setError}) => {
   return (
     <BrowserRouter>
 
@@ -12,8 +12,9 @@ export const Router = () => {
         <Routes>
           <Route path='/' element={<Navigate to='/intro' />} />
           <Route path='/intro' element={<Intro />} />
-          <Route path='/questionnaire' element={<Questionnaire />} />
-          <Route path='/recommendation' element={<Recommendation />} />
+          <Route path='/questionnaire' element={<Questionnaire setRecommendations={setRecommendations} setError={setError} />} />
+          <Route path='/recommendation' 
+            element={<Recommendation recommendations={recommendations} />}/>
 
         </Routes>
       </section>
@@ -21,3 +22,9 @@ export const Router = () => {
     </BrowserRouter>
   )
 }
+
+Router.propTypes = {
+    recommendations: PropTypes.array.isRequired,
+    setRecommendations: PropTypes.func.isRequired,
+    setError: PropTypes.func.isRequired
+  }
