@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Router } from './routers/Router';
 
 function App() {
   const [respuestas, setRespuestas] = useState([{
@@ -102,6 +103,7 @@ function App() {
 
   return (
     <div>
+       <Router />
       <h1>Recomendador</h1>
       
       {/* Mensaje de error */}
