@@ -61,6 +61,6 @@ export const Question1 = ({ responses, onChange }) => {
 };
 
 Question1.propTypes = {
-  responses: PropTypes.object.isRequired,
+  responses: PropTypes.object,
   onChange: PropTypes.func.isRequired,
 }
