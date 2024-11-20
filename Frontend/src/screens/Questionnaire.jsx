@@ -5,6 +5,7 @@ import { Question3 } from "../components/Question3";
 import { Question4 } from "../components/Question4";
 import { Question5 } from "../components/Question5";
 import { useNavigate } from "react-router-dom";
+import fondo from '../assets/Fondo.png'
 import PropTypes from 'prop-types';
 
 export const Questionnaire = ({ setRecommendations }) => {
@@ -116,7 +117,8 @@ export const Questionnaire = ({ setRecommendations }) => {
   };
 
   const handleSelectResponse = (index) => {
-    setActiveResponseIndex(index); // Cambiar el usuario seleccionado
+    setActiveResponseIndex(index);
+    setCurrentQuestion(1) // Cambiar el usuario seleccionado
   };
 
   const renderQuestion = () => {
@@ -139,59 +141,75 @@ export const Questionnaire = ({ setRecommendations }) => {
   
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800">
-        <div className="flex flex-wrap mt-4 items-center ">
-        {responses.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handleSelectResponse(index)}
-            className={`px-4 py-2 m-2 rounded ${
-              index === activeResponseIndex
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300 hover:bg-gray-400"
-            }`}
-          >
-            <img className="w-10" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"></img>
-            Usuario {index + 1}
-          </button>
-        ))}
+    <div className="flex flex-col items-center min-h-screen bg-gray-100 text-gray-800 text-white">
 
-        <button
-            className="bg-teal-600 text-white py-2 px-3 mt-4 rounded-lg"
-            onClick={handleAddResponse}
-        >
-            +
-        </button>
-      </div>
+        <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
+        
+        <section className="flex flex-col relative w-full px-32 z-10 mt-24 items-center h-fit">
+          <h2 className="text-4xl font-bold">Who wants a Reko?</h2>
+          <div className="flex flex-wrap mt-4 items-center ">
 
-      <h1 className="text-2xl font-bold my-6">Pregunta {currentQuestion}</h1>
-      <div className="mb-6">{renderQuestion()}</div>
-      <div className="flex space-x-4">
-        <button
-          onClick={handlePrev}
-          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-          disabled={currentQuestion === 1}
-        >
-          Previous
-        </button>
+            
+          {responses.map((_, index) => (
+            <figure className="flex flex-col items-center" key={index}>
+              <img 
+                onClick={() => handleSelectResponse(index)}
+                className={`px-4 py-2 m-2 rounded ${
+                  index === activeResponseIndex
+                    ? "w-32"
+                    : "w-24"
+                }`} 
+                src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png">  
+              </img>
+              <h3>Usuario {index + 1}</h3>
+
+            </figure>
+            
+          ))}
+
+            <button
+                className=" ml-4 text-white py-1 px-3 mt-4 text-6xl rounded-lg"
+                onClick={handleAddResponse}
+            >
+                +
+            </button>
+          </div>
+
+          <h2 className="text-4xl font-bold mt-10">What are your preferences?</h2>
+
+          <h1 className="text-2xl font-bold my-6">{currentQuestion + '/5'}</h1>
+
+          <section className="flex flex-row items-center space-x-24">
+            <button
+              onClick={handlePrev}
+              className="px-4 py-2  bg-primary-lightpink text-white rounded hover:bg-primary-darkpink"
+              disabled={currentQuestion === 1}
+            >
+              {'<'}
+            </button>
+
+            <div className="w-[600px] h-[300px] mb-6">{renderQuestion()}</div>
+            
         
-       
-          <button
-            onClick={handleNext}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            disabled={currentQuestion === 5}
-          >
-            Next
-          </button>
-        
-      </div>
+            <button
+              onClick={handleNext}
+              className="px-4 py-2 bg-primary-lightpink text-white rounded hover:bg-primary-darkpink"
+              disabled={currentQuestion === 5}
+            >
+              {'>'}
+            </button>
+          </section>
+          
+          
+      
 
           <button
             onClick={handleSubmit}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mt-8"
+            className="px-4 py-3 bg-primary-lightpink text-white text-2xl rounded-lg hover:bg-primary-darkpink mt-8"
           >
-            Finish
+            Get Reko
           </button>
+        </section>
 
       
     </div>
