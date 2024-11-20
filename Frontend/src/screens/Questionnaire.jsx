@@ -5,7 +5,6 @@ import { Question3 } from "../components/Question3";
 import { Question4 } from "../components/Question4";
 import { Question5 } from "../components/Question5";
 import { useNavigate } from "react-router-dom";
-import { User } from "../components/User"; 
 import PropTypes from 'prop-types';
 
 export const Questionnaire = ({ setRecommendations, setError }) => {
