@@ -37,7 +37,7 @@ def generar_usuario_ficticio(respuestas):
         plataforma_moda = Counter(plataformas).most_common(1)[0][0]
         
         # Obtener los géneros únicos
-        generos = list(set.union(*[set(r["generos"].split(',')) for r in respuestas if r["generos"]]))
+        generos = list(set.union(*[set(r["generos"]) for r in respuestas if r["generos"]]))
         if not generos:
             raise ValueError("No se proporcionaron géneros válidos.")
         

@@ -104,7 +104,7 @@ export const Questionnaire = ({ setRecommendations, setError }) => {
       ...responses,
       {
         plataformas: [],
-        generos: "",
+        generos: [],
         formato: "",
         calificacion_minima: "",
         rango_anios: { desde: "", hasta: "" },
