@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 export const Question3 = ({ responses, onChange }) => {
-  const options = ["Movies", "Series", "Both"];
+  const options = ["movie", "show"];
 
   return (
     <div className="text-center">

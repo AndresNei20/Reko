@@ -4,7 +4,7 @@ import { Questionnaire } from '../screens/Questionnaire'
 import { Recommendation } from '../screens/Recommendation'
 import PropTypes from 'prop-types'
 
-export const Router = ({recommendations, setRecommendations, setError}) => {
+export const Router = ({recommendations, setRecommendations}) => {
   return (
     <BrowserRouter>
 
@@ -12,7 +12,7 @@ export const Router = ({recommendations, setRecommendations, setError}) => {
         <Routes>
           <Route path='/' element={<Navigate to='/intro' />} />
           <Route path='/intro' element={<Intro />} />
-          <Route path='/questionnaire' element={<Questionnaire setRecommendations={setRecommendations} setError={setError} />} />
+          <Route path='/questionnaire' element={<Questionnaire setRecommendations={setRecommendations}/>} />
           <Route path='/recommendation' 
             element={<Recommendation recommendations={recommendations} />}/>
 
@@ -25,6 +25,5 @@ export const Router = ({recommendations, setRecommendations, setError}) => {
 
 Router.propTypes = {
     recommendations: PropTypes.array.isRequired,
-    setRecommendations: PropTypes.func.isRequired,
-    setError: PropTypes.func.isRequired
-  }
+    setRecommendations: PropTypes.func.isRequired, 
+}

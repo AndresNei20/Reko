@@ -5,10 +5,10 @@ import { Question3 } from "../components/Question3";
 import { Question4 } from "../components/Question4";
 import { Question5 } from "../components/Question5";
 import { useNavigate } from "react-router-dom";
-import { User } from "../components/User"; 
 import PropTypes from 'prop-types';
 
-export const Questionnaire = ({ setRecommendations, setError }) => {
+export const Questionnaire = ({ setRecommendations }) => {
+  const [error, setError] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [responses, setResponses] = useState([
     {
@@ -92,7 +92,9 @@ export const Questionnaire = ({ setRecommendations, setError }) => {
         body: JSON.stringify({ respuestas: responsesConverted }),
       });
       const data = await response.json();
-      setRecommendations(data.recommendations);
+      setRecommendations(data.recomendaciones);
+      console.log('recomendation', data.recomendaciones);
+      
       navigate("/recommendation");
     } catch (error) {
       console.error("Error al obtener recommendations:", error);
@@ -197,6 +199,5 @@ export const Questionnaire = ({ setRecommendations, setError }) => {
 };
 
 Questionnaire.propTypes = {
-  setRecommendations: PropTypes.func.isRequired,
-  setError: PropTypes.func.isRequired,
+  setRecommendations: PropTypes.func.isRequired
 };

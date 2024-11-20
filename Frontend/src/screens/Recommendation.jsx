@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export const Recommendation = ({ recommendations }) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center text-gray-800">
       <h1 className="text-2xl font-bold mb-4">Your Movie Recommendations</h1>
 
       {recommendations && recommendations.length > 0 ? (
