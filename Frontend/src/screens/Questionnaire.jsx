@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Question1 } from "../components/Question1";
 import { Question2 } from "../components/Question2";
 import { Question3 } from "../components/Question3";
@@ -7,6 +7,42 @@ import { Question5 } from "../components/Question5";
 import { useNavigate } from "react-router-dom";
 import fondo from '../assets/Fondo.png'
 import PropTypes from 'prop-types';
+import profileImg1 from '../assets/profile1.png'
+import profileImg2 from '../assets/profile2.png'
+import profileImg3 from '../assets/profile3.png'
+import profileImg4 from '../assets/profile4.png'
+import profileImg5 from '../assets/profile5.png'
+import profileImg6 from '../assets/profile6.png'
+import profileImg7 from '../assets/profile7.png'
+import profileImg8 from '../assets/profile8.png'
+import profileImg9 from '../assets/profile9.png'
+import profileImg10 from '../assets/profile10.png'
+
+const profileImages = {
+  profileImg1,
+  profileImg2, 
+  profileImg3,
+  profileImg4,
+  profileImg5,
+  profileImg6,
+  profileImg7,
+  profileImg8,
+  profileImg9,
+  profileImg10
+}
+
+// Convertimos el objeto de imágenes a un array
+  const profileImagesArray = Object.values(profileImages);
+
+  // Función para desordenar el array
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const randomIndex = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[i]];
+    }
+    return shuffled;
+  };
 
 export const Questionnaire = ({ setRecommendations }) => {
   const [error, setError] = useState('');
@@ -19,7 +55,17 @@ export const Questionnaire = ({ setRecommendations }) => {
       calificacion_minima: "",
       rango_anios: { desde: "", hasta: "" },
     },
-  ]);
+  ])
+
+    const [shuffledImages, setShuffledImages] = useState([]);
+
+  useEffect(() => {
+    // Desordenar el array de imágenes al inicio
+    setShuffledImages(shuffleArray(profileImagesArray));
+  }, []); // Solo se ejecuta al montar el componente
+
+
+  
   const [activeResponseIndex, setActiveResponseIndex] = useState(0); // Índice del usuario seleccionado
   const navigate = useNavigate();
 
@@ -94,7 +140,7 @@ export const Questionnaire = ({ setRecommendations }) => {
       });
       const data = await response.json();
       setRecommendations(data.recomendaciones);
-      console.log('recomendation', data.recomendaciones);
+      console.log('recomendation', data.recomendaciones, data);
       
       navigate("/recommendation");
     } catch (error) {
@@ -141,7 +187,7 @@ export const Questionnaire = ({ setRecommendations }) => {
   
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 text-gray-800 text-white">
+    <div className="flex flex-col items-center min-h-screen text-white">
 
         <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
         
@@ -152,19 +198,16 @@ export const Questionnaire = ({ setRecommendations }) => {
             
           {responses.map((_, index) => (
             <figure className="flex flex-col items-center" key={index}>
-              <img 
+              <img
                 onClick={() => handleSelectResponse(index)}
                 className={`px-4 py-2 m-2 rounded ${
-                  index === activeResponseIndex
-                    ? "w-32"
-                    : "w-24"
-                }`} 
-                src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png">  
-              </img>
-              <h3>Usuario {index + 1}</h3>
-
+                  index === activeResponseIndex ? "w-28" : "w-20"
+                }`}
+                src={shuffledImages[index]} // Usamos la imagen desordenada
+                alt={`Profile ${index + 1}`}
+              />
+              <h3 className="text-white text-sm">Friend {index + 1}</h3>
             </figure>
-            
           ))}
 
             <button
@@ -179,37 +222,41 @@ export const Questionnaire = ({ setRecommendations }) => {
 
           <h1 className="text-2xl font-bold my-6">{currentQuestion + '/5'}</h1>
 
-          <section className="flex flex-row items-center space-x-24">
+          <section className="w-[1500px] h-fit mb-6">{renderQuestion()}</section>
+            
+          <section className="flex flex-row items-center space-x-32">
             <button
               onClick={handlePrev}
-              className="px-4 py-2  bg-primary-lightpink text-white rounded hover:bg-primary-darkpink"
+              className="px-4 py-2  bg-primary-blue text-white rounded hover:bg-gray-900"
               disabled={currentQuestion === 1}
             >
-              {'<'}
+              ← Previous
             </button>
 
-            <div className="w-[600px] h-[300px] mb-6">{renderQuestion()}</div>
-            
-        
+            <button
+              onClick={handleSubmit}
+              className="px-4 py-3 bg-primary-lightpink text-white text-2xl rounded-lg hover:bg-primary-darkpink mt-8"
+            >
+              Get Reko
+            </button>
+
             <button
               onClick={handleNext}
-              className="px-4 py-2 bg-primary-lightpink text-white rounded hover:bg-primary-darkpink"
+              className="px-4 py-2 bg-primary-blue text-white rounded  hover:bg-gray-900"
               disabled={currentQuestion === 5}
             >
-              {'>'}
+              Next →
             </button>
-          </section>
-          
-          
-      
 
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-3 bg-primary-lightpink text-white text-2xl rounded-lg hover:bg-primary-darkpink mt-8"
-          >
-            Get Reko
-          </button>
+            
+
+          </section>
+
+          <h2>Error: {error} </h2>
         </section>
+        
+        
+
 
       
     </div>

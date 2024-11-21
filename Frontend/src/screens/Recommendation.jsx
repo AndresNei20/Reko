@@ -1,49 +1,52 @@
 import { NavLink } from "react-router-dom";
-import PropTypes from 'prop-types'
-
+import PropTypes from "prop-types";
+import { Movie } from "../components/Movie";
+import fondo from '../assets/Fondo.png'
 
 export const Recommendation = ({ recommendations }) => {
   return (
-    <div className="flex flex-col items-center text-gray-800">
-      <h1 className="text-2xl font-bold mb-4">Your Movie Recommendations</h1>
+    <div className="flex flex-col items-center justify-center w-full mt-4">
 
-      {recommendations && recommendations.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl">
-          {recommendations.map((rec, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center text-center"
-            >
-              <img
-                src={rec.posterUrl || "https://via.placeholder.com/150"}
-                alt={rec.title}
-                className="w-full h-48 object-cover rounded-md mb-4"
-              />
-              <h2 className="text-xl font-semibold">{rec.title}</h2>
-              <p className="text-gray-500">{rec.releaseYear}</p>
-              <p className="mt-2">{rec.description || "No description available."}</p>
-              <a
-                href={rec.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 bg-red-800 text-white py-1 px-3 rounded-md hover:bg-red-700"
-              >
-                Watch Now
-              </a>
+      <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
+      
+      <section className="flex flex-col relative w-full px-32 z-10 mt-24 items-center h-fit">
+          <h1 className="text-4xl font-bold mb-12 mt-9 text-white ">Your Movie Recommendations</h1>
+
+          {recommendations && recommendations.length > 0 ? (
+            <div className="flex w-full space-x-6 items-center justify-center">
+              {recommendations.map((rec, index) => (
+                <Movie
+                  key={index}
+                  title={rec.title}
+                  releaseYear={rec.releaseYear}
+                  posterUrl={rec.posterUrl}
+                  rating={rec.rating}
+                  url={rec.url}
+                />
+              ))}
             </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-600 text-center">No recommendations available at the moment.</p>
-      )}
+          ) : (
+            <p className="text-white-600 text-center text-xl">No recommendations available at the moment.</p>
+          )}
 
-      <NavLink to="/" className="mt-6 text-red-700 underline">
-        Back to Home
-      </NavLink>
+          <NavLink to="/" className="mt-16 text-primary-lightpink underline">
+            Back to Home
+          </NavLink>
+
+      </section>
+      
     </div>
   );
 };
 
 Recommendation.propTypes = {
-    recommendations: PropTypes.array.isRequired,
-  }
+  recommendations: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      releaseYear: PropTypes.number.isRequired,
+      posterUrl: PropTypes.string,
+      description: PropTypes.string,
+      url: PropTypes.string,
+    })
+  ).isRequired,
+};

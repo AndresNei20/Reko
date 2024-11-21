@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import primeImg from '../assets/prime-icon.jpg';
+import primeImg from '../assets/prime-icon.png';
 import netflixImg from '../assets/netflix-icon.png';
 import hboImg from '../assets/hbo-icon.png';
 import CheckboxImage from './CheckboxImage'; 
@@ -17,9 +17,10 @@ export const Question1 = ({ responses, onChange }) => {
 
   return (
     <div className="text-center">
-      <h2 className="text-xl font-medium mb-10">Select your favorite platforms</h2>
+      <h2 className="text-xl font-medium mb-20">Select your favorite platforms</h2>
       <div className="flex flex-wrap justify-center space-x-10">
         <CheckboxImage
+          type="checkbox"
           value="Netflix"
           checked={responses.plataformas.includes("Netflix")}
           onChange={(e) => handleCheckboxChange("Netflix", e.target.checked)}
@@ -27,6 +28,7 @@ export const Question1 = ({ responses, onChange }) => {
           altText="Netflix"
         />
         <CheckboxImage
+          type="checkbox"
           value="Prime"
           checked={responses.plataformas.includes("Prime")}
           onChange={(e) => handleCheckboxChange("Prime", e.target.checked)}
@@ -34,6 +36,7 @@ export const Question1 = ({ responses, onChange }) => {
           altText="Prime Video"
         />
         <CheckboxImage
+          type="checkbox"
           value="HBO"
           checked={responses.plataformas.includes("HBO")}
           onChange={(e) => handleCheckboxChange("HBO", e.target.checked)}
