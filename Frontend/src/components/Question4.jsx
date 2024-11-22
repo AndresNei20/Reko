@@ -17,7 +17,7 @@ export const Question4 = ({ responses, onChange }) => {
           <button
             key={value}
             onClick={() => handleStarClick(value)}
-            className={`w-8 h-8 text-6xl ${rating >= value ? 'text-yellow-500' : 'text-gray-300'} rounded-full`}
+            className={`w-8 h-8 text-6xl  ${rating >= value ? 'text-primary-lightpink' : 'text-gray-300'} rounded-full`}
           >
             {value <= rating ? '★' : '☆'} 
           </button>

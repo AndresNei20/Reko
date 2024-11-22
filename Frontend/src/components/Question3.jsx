@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import movieImg from '../assets/action.png'
-import serieImg from '../assets/series.png'
+import movieImg from '../assets/movie.png'
+import serieImg from '../assets/serie.png'
 import CheckboxImage from './CheckboxImage';
 
 

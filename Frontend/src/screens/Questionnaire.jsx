@@ -163,7 +163,7 @@ export const Questionnaire = ({ setRecommendations }) => {
 
           <img className="flex mx-10 h-[600px] " src={line} />
 
-          <section className="flex w-3/4 h-full flex-col px-10 ">
+          <section className="flex w-3/4 h-full flex-col px-10 justify-start ">
               <h2 className="text-2xl font-medium">Tell us your <span className="text-primary-lightpink">Preferences</span></h2>
 
               <section className="flex mt-20 h-fit mb-6">{renderQuestion()}</section>
