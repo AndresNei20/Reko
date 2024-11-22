@@ -10,7 +10,7 @@ export const Question4 = ({ responses, onChange }) => {
   };
 
   return (
-    <div className="flex flex-col text-center">
+    <div className="flex flex-col text-center w-full items-center ">
       <h2 className="text-xl font-bold mb-20">{"What's the minimum rating you prefer?"}</h2>
       <div className="flex justify-center space-x-8">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (

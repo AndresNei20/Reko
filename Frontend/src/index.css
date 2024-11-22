@@ -12,34 +12,14 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Estilo de los botones de flecha */
-.slick-prev, .slick-next {
-  background-color: #000;
-  border-radius: 50%;
-  padding: 10px;
-  color: #fff;
+/* Ocultar la scrollbar completamente */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Oculta la barra en navegadores Webkit (Chrome, Safari) */
 }
 
-/* Estilo del contenedor del slider */
-.slick-slide {
-  padding: 0 10px; /* Añadir espacio entre los elementos */
-}
-
-/* Estilo de la imagen dentro del slider */
-.slider-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  transition: transform 0.2s ease;
-}
-
-/* Efecto al pasar el mouse sobre una imagen */
-.slider-item:hover img {
-  transform: scale(1.05);
+.hide-scrollbar {
+  -ms-overflow-style: none; /* Oculta la barra en IE y Edge */
+  scrollbar-width: none; /* Oculta la barra en Firefox */
 }

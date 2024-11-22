@@ -16,9 +16,11 @@ export const Question1 = ({ responses, onChange }) => {
   };
 
   return (
-    <div className="text-center">
-      <h2 className="text-xl font-medium mb-20">Select your favorite platforms</h2>
-      <div className="flex flex-wrap justify-center space-x-10">
+    <scetion className="flex w-full flex-col items-center ">
+      <h2 className="flex text-2xl font-light mb-2">Select your favorite platform</h2>
+      <h2 className="flex text-xl font-extralight mb-20">Your can select one or more platforms</h2>
+
+      <div className="flex justify-center items-center space-x-10">
         <CheckboxImage
           type="checkbox"
           value="Netflix"
@@ -44,7 +46,7 @@ export const Question1 = ({ responses, onChange }) => {
           altText="HBO"
         />
       </div>
-    </div>
+    </scetion>
   );
 };
 

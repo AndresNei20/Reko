@@ -7,7 +7,7 @@ export const Question5 = ({ responses, onChange }) => {
   };
 
   return (
-    <div className="text-center">
+    <div className="flex w-full flex-col items-center ">
       <h2 className="text-xl font-bold mb-20">What range of years do you prefer?</h2>
       
       <div className="flex flex-col items-center space-y-2">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Question1 } from "../components/Question1";
 import { Question2 } from "../components/Question2";
 import { Question3 } from "../components/Question3";
@@ -6,6 +6,9 @@ import { Question4 } from "../components/Question4";
 import { Question5 } from "../components/Question5";
 import { useNavigate } from "react-router-dom";
 import fondo from '../assets/back.png'
+import line from '../assets/line.png'
+import arrowLeft from '../assets/arrow-left.png'
+import arrowRight from '../assets/arrow-right.png'
 import PropTypes from 'prop-types';
 import { UserList } from "../components/UsersList";
 
@@ -145,13 +148,12 @@ export const Questionnaire = ({ setRecommendations }) => {
   
 
   return (
-    <div className="flex flex-col w-full h-full items-center min-h-screen text-white">
+    <div className="flex flex-col w-full h-full items-center justify-start min-h-screen text-white">
 
         <div className="flex fixed top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
         
-        <section className="flex relative w-full h-full px-24 z-10 mt-8 items-start">
-          
-
+        <section className="flex relative items-center flex-row w-full h-full px-24 mt-8">
+        
           <UserList
               responses={responses}
               activeResponseIndex={activeResponseIndex} 
@@ -159,46 +161,48 @@ export const Questionnaire = ({ setRecommendations }) => {
               handleAddResponse={handleAddResponse}
           />
 
-          <h2 className="text-4xl font-bold mt-10">What are your preferences?</h2>
+          <img className="flex mx-10 h-[600px] " src={line} />
 
-          <h1 className="text-2xl font-bold my-6">{currentQuestion + '/5'}</h1>
+          <section className="flex w-3/4 h-full flex-col px-10 ">
+              <h2 className="text-2xl font-medium">Tell us your <span className="text-primary-lightpink">Preferences</span></h2>
 
-          <section className="w-[1500px] h-fit mb-6">{renderQuestion()}</section>
-            
-          <section className="flex flex-row items-center space-x-32">
-            <button
-              onClick={handlePrev}
-              className="px-4 py-2  bg-primary-blue text-white rounded hover:bg-gray-900"
-              disabled={currentQuestion === 1}
-            >
-              ← Previous
-            </button>
+              <section className="flex mt-20 h-fit mb-6">{renderQuestion()}</section>
+                
+              <section className="flex flex-row justify-center items-center space-x-40 mt-6">
+                <button
+                  onClick={handlePrev}
+                  className="flex items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
+                  disabled={currentQuestion === 1}
+                >
+                  <img className="w-6 mr-2" src={arrowLeft} alt="" />
+                  Go back
+                </button>
 
-            <button
-              onClick={handleSubmit}
-              className="px-4 py-3 bg-primary-lightpink text-white text-2xl rounded-lg hover:bg-primary-darkpink mt-8"
-            >
-              Get Reko
-            </button>
+                <h1 className="text-2xl px-6 py-2 border-2 border-white my-6 rounded-full ">{currentQuestion + '/5'}</h1>
 
-            <button
-              onClick={handleNext}
-              className="px-4 py-2 bg-primary-blue text-white rounded  hover:bg-gray-900"
-              disabled={currentQuestion === 5}
-            >
-              Next →
-            </button>
+                <button
+                  onClick={handleNext}
+                  className="flex items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
+                  disabled={currentQuestion === 5}
+                >
+                  Continue
+                  <img className="w-6 ml-2" src={arrowRight} alt="" />
+                </button>
 
-            
+              </section>
+
+                {/* <button
+                  onClick={handleSubmit}
+                  className="w-24 px-4 py-3 bg-primary-lightpink text-white text-2xl rounded-lg hover:bg-primary-darkpink mt-8"
+                >
+                  Get Reko
+                </button>
+
+              <h2>Error: {error} </h2> */}
 
           </section>
-
-          <h2>Error: {error} </h2>
+          
         </section>
-        
-        
-
-
       
     </div>
   );
