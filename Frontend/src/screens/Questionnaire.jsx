@@ -5,44 +5,10 @@ import { Question3 } from "../components/Question3";
 import { Question4 } from "../components/Question4";
 import { Question5 } from "../components/Question5";
 import { useNavigate } from "react-router-dom";
-import fondo from '../assets/Fondo.png'
+import fondo from '../assets/back.png'
 import PropTypes from 'prop-types';
-import profileImg1 from '../assets/profile1.png'
-import profileImg2 from '../assets/profile2.png'
-import profileImg3 from '../assets/profile3.png'
-import profileImg4 from '../assets/profile4.png'
-import profileImg5 from '../assets/profile5.png'
-import profileImg6 from '../assets/profile6.png'
-import profileImg7 from '../assets/profile7.png'
-import profileImg8 from '../assets/profile8.png'
-import profileImg9 from '../assets/profile9.png'
-import profileImg10 from '../assets/profile10.png'
+import { UserList } from "../components/UsersList";
 
-const profileImages = {
-  profileImg1,
-  profileImg2, 
-  profileImg3,
-  profileImg4,
-  profileImg5,
-  profileImg6,
-  profileImg7,
-  profileImg8,
-  profileImg9,
-  profileImg10
-}
-
-// Convertimos el objeto de imágenes a un array
-  const profileImagesArray = Object.values(profileImages);
-
-  // Función para desordenar el array
-  const shuffleArray = (array) => {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const randomIndex = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[i]];
-    }
-    return shuffled;
-  };
 
 export const Questionnaire = ({ setRecommendations }) => {
   const [error, setError] = useState('');
@@ -56,14 +22,6 @@ export const Questionnaire = ({ setRecommendations }) => {
       rango_anios: { desde: "", hasta: "" },
     },
   ])
-
-    const [shuffledImages, setShuffledImages] = useState([]);
-
-  useEffect(() => {
-    // Desordenar el array de imágenes al inicio
-    setShuffledImages(shuffleArray(profileImagesArray));
-  }, []); // Solo se ejecuta al montar el componente
-
 
   
   const [activeResponseIndex, setActiveResponseIndex] = useState(0); // Índice del usuario seleccionado
@@ -187,36 +145,19 @@ export const Questionnaire = ({ setRecommendations }) => {
   
 
   return (
-    <div className="flex flex-col items-center min-h-screen text-white">
+    <div className="flex flex-col w-full h-full items-center min-h-screen text-white">
 
-        <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
+        <div className="flex fixed top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
         
-        <section className="flex flex-col relative w-full px-32 z-10 mt-24 items-center h-fit">
-          <h2 className="text-4xl font-bold">Who wants a Reko?</h2>
-          <div className="flex flex-wrap mt-4 items-center ">
+        <section className="flex relative w-full h-full px-24 z-10 mt-8 items-start">
+          
 
-            
-          {responses.map((_, index) => (
-            <figure className="flex flex-col items-center" key={index}>
-              <img
-                onClick={() => handleSelectResponse(index)}
-                className={`px-4 py-2 m-2 rounded ${
-                  index === activeResponseIndex ? "w-28" : "w-20"
-                }`}
-                src={shuffledImages[index]} // Usamos la imagen desordenada
-                alt={`Profile ${index + 1}`}
-              />
-              <h3 className="text-white text-sm">Friend {index + 1}</h3>
-            </figure>
-          ))}
-
-            <button
-                className=" ml-4 text-white py-1 px-3 mt-4 text-6xl rounded-lg"
-                onClick={handleAddResponse}
-            >
-                +
-            </button>
-          </div>
+          <UserList
+              responses={responses}
+              activeResponseIndex={activeResponseIndex} 
+              handleSelectResponse={handleSelectResponse}
+              handleAddResponse={handleAddResponse}
+          />
 
           <h2 className="text-4xl font-bold mt-10">What are your preferences?</h2>
 
