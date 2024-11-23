@@ -5,7 +5,8 @@ import { genres } from '../services/genresImgs';
 export const Question2 = ({ responses, onChange }) => {
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <h2 className="text-xl font-bold mb-20">Which genres do you prefer?</h2>
+      <h2 className="flex text-2xl font-light mb-2">Select your favorites genres</h2>
+      <h2 className="flex text-xl font-extralight mb-20">Your can select one or more genres</h2>
       <div className="flex flex-wrap justify-center space-x-4 space-y-2">
         {genres.map((genre) => (
   

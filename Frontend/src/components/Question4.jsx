@@ -11,7 +11,8 @@ export const Question4 = ({ responses, onChange }) => {
 
   return (
     <div className="flex flex-col text-center w-full items-center ">
-      <h2 className="text-xl font-bold mb-20">{"What's the minimum rating you prefer?"}</h2>
+      <h2 className="flex text-2xl font-light mb-2">Select your the minimun range that your prefer</h2>
+      <h2 className="flex text-xl font-extralight mb-20">Your have to select a amount between 0 - 10 of rating movie </h2>
       <div className="flex justify-center space-x-8">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
           <button

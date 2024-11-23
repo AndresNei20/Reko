@@ -1,60 +1,81 @@
-import PropTypes from 'prop-types';
-import ReactSlider from 'react-slider';
+import PropTypes from "prop-types";
+import ReactSlider from "react-slider";
 
 export const Question5 = ({ responses, onChange }) => {
   const handleSliderChange = (values) => {
-    onChange('rango_anios', { desde: values[0].toString(), hasta: values[1].toString() });
+    onChange("rango_anios", { desde: values[0].toString(), hasta: values[1].toString() });
   };
 
   return (
-    <div className="flex w-full flex-col items-center ">
-      <h2 className="text-xl font-bold mb-20">What range of years do you prefer?</h2>
-      
-      <div className="flex flex-col items-center space-y-2">
-        <div className="w-full max-w-lg mx-auto items-center justify-center mb-12">
+    <div className="flex w-full flex-col items-center">
+      <h2 className="flex text-2xl font-light mb-2">Select the range of years that you prefer</h2>
+      <h2 className="flex text-xl font-extralight mb-20">You have to select a range of release dates for movies</h2>
+
+      <div className="flex w-full flex-col items-center space-y-2">
+        <div className="w-full max-w-lg mx-auto items-center justify-center mb-20">
           <ReactSlider
             className="my-slider"
-            value={[responses.rango_anios.desde, responses.rango_anios.hasta]}
+            value={[
+              Number(responses.rango_anios.desde || 1900),
+              Number(responses.rango_anios.hasta || 2024),
+            ]}
             onChange={handleSliderChange}
             min={1900}
-            max={2024}  // Puedes ajustar estos valores según el rango de años que quieras
+            max={2024}
             step={1}
-            renderTrack={(props) => (
-              <div {...props} className="flex-1 bg-gray-300 h-2 rounded-lg" />
-            )}
-            renderThumb={(props) => (
-              <div
-                {...props}
-                className="w-6 h-6 inset-y-[-6px] bg-primary-lightpink rounded-full cursor-pointer"
-              />
-            )}
+            renderTrack={(props, state) => {
+              // `state.index` se usa para diferenciar las secciones del track
+              const trackColor =
+                state.index === 0
+                  ? "bg-gray-950" // Track antes de la primera bolita
+                  : state.index === 1
+                  ? "bg-gradient-to-r from-primary-lightpink to-yellow-400" // Línea entre las bolitas
+                  : "bg-gray-950"; // Track después de la segunda bolita
+              return (
+                <div
+                  {...props}
+                  className={`h-4 rounded-lg ${trackColor}`}
+                />
+              );
+            }}
+            renderThumb={(props, state) => {
+              const thumbColor = state.index === 0 ? "bg-primary-lightpink" : "bg-yellow-400"; // Colores para las bolitas
+              return (
+                <div
+                  {...props}
+                  className={`w-8 h-8  inset-y-[-8px] rounded-full cursor-pointer ${thumbColor}`}
+                >
+                
+                </div>
+              );
+            }}
           />
         </div>
 
-        <div className="flex justify-between w-full max-w-lg mx-auto">
+        <div className="flex justify-between w-full max-w-lg mx-auto text-2xl">
           <div className="flex items-center">
-            <label className="mr-2">From:</label>
+            <label className="m-2">From:</label>
             <input
               type="number"
               value={responses.rango_anios.desde}
               onChange={(e) =>
                 onChange("rango_anios", { ...responses.rango_anios, desde: e.target.value })
               }
-              className="border border-gray-300 rounded px-2 py-1 text-white"
+              className="rounded px-2 py-2 text-primary-lightpink"
               placeholder="Start year"
               min="1900"
               max="2024"
             />
           </div>
           <div className="flex items-center">
-            <label className="mr-2">To:</label>
+            <label className="m-2">To:</label>
             <input
               type="number"
               value={responses.rango_anios.hasta || 2024}
               onChange={(e) =>
                 onChange("rango_anios", { ...responses.rango_anios, hasta: e.target.value })
               }
-              className="border border-gray-300 rounded px-2 py-1 text-white"
+              className="rounded px-2 py-2 text-yellow-400"
               placeholder="End year"
               min="1900"
               max="2024"
