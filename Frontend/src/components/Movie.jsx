@@ -33,5 +33,5 @@ Movie.propTypes = {
   rating: PropTypes.string,
   type: PropTypes.string,
   genre: PropTypes.string,
-  platform: PropTypes.string
+  platform: PropTypes.string,
 };
