@@ -15,6 +15,7 @@ import { UserList } from "../components/UsersList";
 
 export const Questionnaire = ({ setRecommendations }) => {
   const [error, setError] = useState('');
+  const [groupname, setGroupname] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [responses, setResponses] = useState([
     {
@@ -25,6 +26,9 @@ export const Questionnaire = ({ setRecommendations }) => {
       rango_anios: { desde: "", hasta: "" },
     },
   ])
+
+  console.log('group', groupname);
+  
 
   
   const [activeResponseIndex, setActiveResponseIndex] = useState(0);
@@ -130,7 +134,7 @@ export const Questionnaire = ({ setRecommendations }) => {
         rango_anios: { desde: "", hasta: "" },
       },
     ]);
-    setActiveResponseIndex(responses.length); // Seleccionar la nueva respuesta añadida
+    setActiveResponseIndex(responses.length); 
   };
 
   const handleSelectResponse = (index) => {
@@ -167,14 +171,15 @@ export const Questionnaire = ({ setRecommendations }) => {
         <div className="flex fixed top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
         
         <section className="flex relative items-center flex-row w-full h-full px-24 mt-8">
-        
           <UserList
+              groupname={groupname}
+              setGroupname={setGroupname}
               responses={responses}
               activeResponseIndex={activeResponseIndex} 
               handleSelectResponse={handleSelectResponse}
               handleAddResponse={handleAddResponse}
           />
-
+          
           <img className="flex mx-10 h-[600px] " src={line} />
 
           <section className="flex w-3/4 h-full flex-col px-10 justify-start ">
@@ -205,10 +210,8 @@ export const Questionnaire = ({ setRecommendations }) => {
                     <img className="w-6 ml-2" src={arrowRight} alt="" />
                   </button>
                   :
-
                   currentQuestion == 5 && finalUser
                   ?
-                  
                   <button
                   onClick={handleSubmit}
                   className="flex items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
@@ -226,13 +229,9 @@ export const Questionnaire = ({ setRecommendations }) => {
                     <img className="w-6 ml-2" src={arrowRight} alt="" />
                   </button>
                 }
-
               </section>
-
           </section>
-          
         </section>
-      
     </div>
   );
 };

@@ -7,7 +7,7 @@ import dots from '../assets/dots.png'
 import { useEffect, useState } from 'react'
 import { profileImages } from '../services/profileImg';
 
-export const UserList = ({responses, activeResponseIndex, handleSelectResponse, handleAddResponse}) => {
+export const UserList = ({responses, activeResponseIndex, handleSelectResponse, handleAddResponse, groupname, setGroupname}) => {
 
 
 // Convertimos el objeto de imágenes a un array
@@ -43,10 +43,15 @@ export const UserList = ({responses, activeResponseIndex, handleSelectResponse, 
 
 
   return (
-    <div className="flex flex-col w-[250px] h-[46rem] mt-4 pb-10 pt-5 px-2 items-center bg-gray-950 rounded-lg">
-      <img className="w-16 mb-5" src={dots} />
-      <p className="w-[60%] flex text-2xl font-light text-start mb-2">Our group name</p>
-
+    <div className="flex flex-col w-[250px] h-[46rem] mt-4 pb-10 pt-5 px-2 items-start bg-gray-950 rounded-lg">
+      <img className="w-16 mb-5 self-center" src={dots} />
+      <input
+        type="text"
+        placeholder="Group name"
+        value={groupname}
+        className="w-[80%] flex text-2xl font-light mb-2 bg-transparent border-none focus:outline-none ml-6"
+        onChange={(e) => setGroupname(e.target.value)}
+      />
       <div className="flex flex-col items-center justify-start overflow-y-auto max-h-[40rem] w-full hide-scrollbar pt-4">
         {responses.map((response, index) => (
           <figure
@@ -86,5 +91,7 @@ UserList.propTypes = {
   responses: PropTypes.object.isRequired,
   activeResponseIndex: PropTypes.number.isRequired,
   handleSelectResponse: PropTypes.func.isRequired,
-  handleAddResponse: PropTypes.func.isRequired
+  handleAddResponse: PropTypes.func.isRequired,
+  groupname: PropTypes.string,
+  setGroupname: PropTypes.func.isRequired
 };
