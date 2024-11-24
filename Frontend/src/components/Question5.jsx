@@ -24,28 +24,29 @@ export const Question5 = ({ responses, onChange }) => {
             max={2024}
             step={1}
             renderTrack={(props, state) => {
-              // `state.index` se usa para diferenciar las secciones del track
               const trackColor =
                 state.index === 0
-                  ? "bg-gray-950" // Track antes de la primera bolita
+                  ? "bg-gray-950"
                   : state.index === 1
-                  ? "bg-gradient-to-r from-primary-lightpink to-yellow-400" // Línea entre las bolitas
-                  : "bg-gray-950"; // Track después de la segunda bolita
+                  ? "bg-gradient-to-r from-primary-lightpink to-yellow-400"
+                  : "bg-gray-950";
+            
               return (
                 <div
                   {...props}
+                  key={`track-${state.index}`} // Agrega un key único aquí
                   className={`h-4 rounded-lg ${trackColor}`}
                 />
               );
             }}
             renderThumb={(props, state) => {
+              const { ...rest } = props; // Extraer key
               const thumbColor = state.index === 0 ? "bg-primary-lightpink" : "bg-yellow-400"; // Colores para las bolitas
               return (
                 <div
-                  {...props}
-                  className={`w-8 h-8  inset-y-[-8px] rounded-full cursor-pointer ${thumbColor}`}
+                  {...rest} // Aplicar todas las demás propiedades
+                  className={`w-8 h-8 inset-y-[-8px] rounded-full cursor-pointer ${thumbColor}`}
                 >
-                
                 </div>
               );
             }}

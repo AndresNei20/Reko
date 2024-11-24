@@ -16,7 +16,7 @@ export const Question1 = ({ responses, onChange }) => {
   };
 
   return (
-    <scetion className="flex w-full flex-col items-center ">
+    <section className="flex w-full flex-col items-center ">
       <h2 className="flex text-2xl font-light mb-2">Select your favorite platform</h2>
       <h2 className="flex text-xl font-extralight mb-20">Your can select one or more platforms</h2>
 
@@ -46,7 +46,7 @@ export const Question1 = ({ responses, onChange }) => {
           altText="HBO"
         />
       </div>
-    </scetion>
+    </section>
   );
 };
 

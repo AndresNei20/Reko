@@ -27,14 +27,24 @@ export const Questionnaire = ({ setRecommendations }) => {
   ])
 
   
-  const [activeResponseIndex, setActiveResponseIndex] = useState(0); // Índice del usuario seleccionado
+  const [activeResponseIndex, setActiveResponseIndex] = useState(0);
   const navigate = useNavigate();
 
+  const handleContinue = () => {
+    console.log('en continue');
+    
+    setActiveResponseIndex(activeResponseIndex + 1)
+    setCurrentQuestion(1)
+  }
+
   const handleNext = () => {
+    console.log('next');
+    
     if (currentQuestion < 5) setCurrentQuestion(currentQuestion + 1);
   };
 
   const handlePrev = () => {
+    console.log('back');
     if (currentQuestion > 1) setCurrentQuestion(currentQuestion - 1);
   };
 
@@ -81,13 +91,14 @@ export const Questionnaire = ({ setRecommendations }) => {
       return false;
     }
 
-    setError(""); // Si pasa la validación, limpiar el error
+    setError(""); 
     return true;
   };
 
   const handleSubmit = async () => {
     if (!validateResponses()) return;
-
+    console.log('in submit');
+    
     try {
       const responsesConverted = responses.map((response) => ({
         ...response,
@@ -102,7 +113,6 @@ export const Questionnaire = ({ setRecommendations }) => {
       const data = await response.json();
       setRecommendations(data.recomendaciones);
       console.log('recomendation', data.recomendaciones, data);
-      
       navigate("/recommendation");
     } catch (error) {
       console.error("Error al obtener recommendations:", error);
@@ -145,6 +155,10 @@ export const Questionnaire = ({ setRecommendations }) => {
     }
   };
 
+  const existeOtherUser = activeResponseIndex < responses.length - 1;
+
+  const finalUser = activeResponseIndex == responses.length - 1
+
   
 
   return (
@@ -180,14 +194,38 @@ export const Questionnaire = ({ setRecommendations }) => {
 
                 <h1 className="text-2xl px-6 py-2 border-2 border-white my-6 rounded-full ">{currentQuestion + '/5'}</h1>
 
-                <button
+                {
+                  currentQuestion === 5 && existeOtherUser
+                  ? 
+                  <button
+                  onClick={handleContinue}
+                  className="flex items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
+                  >
+                    Next User
+                    <img className="w-6 ml-2" src={arrowRight} alt="" />
+                  </button>
+                  :
+
+                  currentQuestion == 5 && finalUser
+                  ?
+                  
+                  <button
+                  onClick={handleSubmit}
+                  className="flex items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
+                  >
+                    Get Reko
+                    <img className="w-6 ml-2" src={arrowRight} alt="" />
+                  </button>
+                  :
+                  <button
                   onClick={handleNext}
                   className="flex items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
                   disabled={currentQuestion === 5}
-                >
-                  Continue
-                  <img className="w-6 ml-2" src={arrowRight} alt="" />
-                </button>
+                  >
+                    Continue
+                    <img className="w-6 ml-2" src={arrowRight} alt="" />
+                  </button>
+                }
 
               </section>
 
