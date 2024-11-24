@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import nofillIcon from '../assets/nofill.png'
 import fillIcon from '../assets/fill.png'
 import plusIcon from '../assets/plus-icon.png'
@@ -79,4 +80,11 @@ export const UserList = ({responses, activeResponseIndex, handleSelectResponse, 
       </div>
     </div>
   );
+};
+
+UserList.propTypes = {
+  responses: PropTypes.object.isRequired,
+  activeResponseIndex: PropTypes.number.isRequired,
+  handleSelectResponse: PropTypes.func.isRequired,
+  handleAddResponse: PropTypes.func.isRequired
 };

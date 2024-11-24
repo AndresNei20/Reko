@@ -229,15 +229,6 @@ export const Questionnaire = ({ setRecommendations }) => {
 
               </section>
 
-                {/* <button
-                  onClick={handleSubmit}
-                  className="w-24 px-4 py-3 bg-primary-lightpink text-white text-2xl rounded-lg hover:bg-primary-darkpink mt-8"
-                >
-                  Get Reko
-                </button>
-
-              <h2>Error: {error} </h2> */}
-
           </section>
           
         </section>

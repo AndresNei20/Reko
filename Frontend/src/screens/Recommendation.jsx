@@ -1,16 +1,22 @@
-import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Movie } from "../components/Movie";
 import fondo from '../assets/Fondo.png'
+import arrowLeft from '../assets/arrow-left.png'
+import { useNavigate } from "react-router-dom";
 
 export const Recommendation = ({ recommendations }) => {
+  const navigate = useNavigate()
+  const handleHome = () => {
+    navigate('/intro')
+  }
   return (
     <div className="flex flex-col items-center justify-center w-full mt-4">
 
       <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
       
       <section className="flex flex-col relative w-full px-32 z-10 mt-24 items-center h-fit">
-          <h1 className="text-4xl font-bold mb-12 mt-9 text-white ">Your Movie Recommendations</h1>
+      <h2 className="flex text-2xl font-light mb-2">Amazing Reko!</h2>
+      <h2 className="flex text-xl font-extralight mb-20">This are the reccomendations for [add group name]</h2>
 
           {recommendations && recommendations.length > 0 ? (
             <div className="flex w-full space-x-6 items-center justify-center">
@@ -29,9 +35,13 @@ export const Recommendation = ({ recommendations }) => {
             <p className="text-white-600 text-center text-xl">No recommendations available at the moment.</p>
           )}
 
-          <NavLink to="/" className="mt-16 text-primary-lightpink underline">
-            Back to Home
-          </NavLink>
+          <button
+            onClick={handleHome}
+            className="flex mt-16 items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
+          >
+            <img className="w-6 ml-2" src={arrowLeft} alt="" />
+            Go back to home
+          </button>
 
       </section>
       
