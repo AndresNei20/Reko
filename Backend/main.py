@@ -7,7 +7,7 @@ from collections import Counter
 
 # Iniciar Flask app
 app = Flask(__name__)
-CORS(app)  # Para permitir las solicitudes desde el frontend (React)
+CORS(app)
 
 # Función para cargar datasets
 def cargar_datasets():
@@ -153,7 +153,14 @@ def recomendar_con_coseno_y_knn(dataset, usuario_ficticio, k=10):
     recomendaciones['similarity_score'] = cosine_similarities[0][similar_indices]
     recomendaciones = recomendaciones.sort_values('similarity_score', ascending=False)
 
-    return recomendaciones[['title', 'releaseYear', 'similarity_score']].to_dict(orient='records')
+    resultados = recomendaciones[['title', 'releaseYear', 'imdbAverageRating', 'genres', 'type', 'similarity_score']].to_dict(orient='records')
+
+    # Imprimir las recomendaciones para depuración
+    print("Recomendaciones generadas:")
+    for rec in resultados:
+        print(rec)
+
+    return resultados
 
 # Ruta para recibir las respuestas del frontend y devolver recomendaciones
 @app.route('/recomendar', methods=['POST'])
