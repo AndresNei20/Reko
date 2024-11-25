@@ -88,13 +88,17 @@ def generar_usuario_ficticio(respuestas):
 def cargar_dataset_por_plataforma(plataforma):
     try:
         if plataforma == "Netflix":
-            return pd.read_csv("datasets/dataNetflix.csv")
+            dataset = pd.read_csv("datasets/dataNetflix.csv")
+            dataset['platform'] = "Netflix"
         elif plataforma == "Prime":
-            return pd.read_csv("datasets/dataPrime.csv")
+            dataset = pd.read_csv("datasets/dataPrime.csv")
+            dataset['platform'] = "Prime"
         elif plataforma == "HBO":
-            return pd.read_csv("datasets/dataHbo.csv")
+            dataset = pd.read_csv("datasets/dataHbo.csv")
+            dataset['platform'] = "HBO"
         else:
             raise ValueError("Plataforma no soportada")
+        return dataset
     except Exception as e:
         print(f"Error al cargar el dataset para {plataforma}: {e}")
         return None
@@ -153,7 +157,7 @@ def recomendar_con_coseno_y_knn(dataset, usuario_ficticio, k=10):
     recomendaciones['similarity_score'] = cosine_similarities[0][similar_indices]
     recomendaciones = recomendaciones.sort_values('similarity_score', ascending=False)
 
-    resultados = recomendaciones[['title', 'releaseYear', 'imdbAverageRating', 'genres', 'type', 'similarity_score']].to_dict(orient='records')
+    resultados = recomendaciones[['title', 'releaseYear', 'imdbAverageRating', 'genres', 'platform', 'type', 'similarity_score']].to_dict(orient='records')
 
     # Imprimir las recomendaciones para depuración
     print("Recomendaciones generadas:")
@@ -161,6 +165,9 @@ def recomendar_con_coseno_y_knn(dataset, usuario_ficticio, k=10):
         print(rec)
 
     return resultados
+
+#LIST WHERE WE WILL STORE THE RECOMMENDATIONS
+historico_recomendaciones = []
 
 # Ruta para recibir las respuestas del frontend y devolver recomendaciones
 @app.route('/recomendar', methods=['POST'])
@@ -174,11 +181,23 @@ def recomendar():
 
         if dataset_seleccionado is not None:
             recomendaciones = recomendar_con_coseno_y_knn(dataset_seleccionado, usuario_ficticio, k=5)
+            
+            historico_recomendaciones.append({
+                'grupo': len(historico_recomendaciones) + 1,
+                'recomendaciones': recomendaciones
+            })
+
             return jsonify({'recomendaciones': recomendaciones})
 
         return jsonify({'recomendaciones': []})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+#GET
+@app.route('/historial', methods=['GET'])
+def obtener_historico_recomendaciones():
+    return jsonify({'historico_recomendaciones': historico_recomendaciones})
+
 
 # Iniciar servidor
 if __name__ == '__main__':
