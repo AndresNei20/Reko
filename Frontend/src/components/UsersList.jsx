@@ -88,7 +88,7 @@ export const UserList = ({responses, activeResponseIndex, handleSelectResponse, 
 };
 
 UserList.propTypes = {
-  responses: PropTypes.object.isRequired,
+  responses: PropTypes.array.isRequired,
   activeResponseIndex: PropTypes.number.isRequired,
   handleSelectResponse: PropTypes.func.isRequired,
   handleAddResponse: PropTypes.func.isRequired,

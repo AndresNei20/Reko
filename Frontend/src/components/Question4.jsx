@@ -5,8 +5,8 @@ export const Question4 = ({ responses, onChange }) => {
   const [rating, setRating] = useState(responses.calificacion_minima || 0);  // Estado para la calificación seleccionada
 
   const handleStarClick = (value) => {
-    setRating(value.toString());
-    onChange("calificacion_minima", value.toString());  // Actualiza el valor de la calificación en el estado
+    setRating(value);
+    onChange("calificacion_minima", value);  // Actualiza el valor de la calificación en el estado
   };
 
   return (

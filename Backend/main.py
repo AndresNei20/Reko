@@ -174,7 +174,8 @@ historico_recomendaciones = []
 def recomendar():
     try:
         data = request.json
-        respuestas = data['respuestas']
+        respuestas = data['data']['respuestas']
+        print('res data', respuestas)
 
         usuario_ficticio = generar_usuario_ficticio(respuestas)
         dataset_seleccionado = cargar_dataset_por_plataforma(usuario_ficticio["plataforma_moda"])

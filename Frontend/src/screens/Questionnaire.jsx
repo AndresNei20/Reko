@@ -104,15 +104,17 @@ export const Questionnaire = ({ setRecommendations }) => {
     console.log('in submit');
     
     try {
-      const responsesConverted = responses.map((response) => ({
-        ...response,
-        calificacion_minima: parseFloat(response.calificacion_minima),
-      }));
+      const responsesToSend = {
+        group_name: groupname,
+        respuestas: responses
+      }
+      console.log('responses to send', responsesToSend);
+      
 
       const response = await fetch("http://localhost:5000/recomendar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ respuestas: responsesConverted }),
+        body: JSON.stringify({ data: responsesToSend }),
       });
       const data = await response.json();
       setRecommendations(data.recomendaciones);
