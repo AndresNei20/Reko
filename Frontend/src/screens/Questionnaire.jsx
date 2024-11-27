@@ -103,18 +103,12 @@ export const Questionnaire = ({ setRecommendations }) => {
     if (!validateResponses()) return;
     console.log('in submit');
     
-    try {
-      const responsesToSend = {
-        group_name: groupname,
-        respuestas: responses
-      }
-      console.log('responses to send', responsesToSend);
-      
+    try {     
 
       const response = await fetch("http://localhost:5000/recomendar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: responsesToSend }),
+        body: JSON.stringify({ group_name: groupname,respuestas: responses }),
       });
       const data = await response.json();
       setRecommendations(data.recomendaciones);

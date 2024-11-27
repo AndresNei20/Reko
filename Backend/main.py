@@ -174,8 +174,9 @@ historico_recomendaciones = []
 def recomendar():
     try:
         data = request.json
-        respuestas = data['data']['respuestas']
-        print('res data', respuestas)
+        print("Data recibida:", data)
+        respuestas = data['respuestas']
+        group_name = data['group_name']
 
         usuario_ficticio = generar_usuario_ficticio(respuestas)
         dataset_seleccionado = cargar_dataset_por_plataforma(usuario_ficticio["plataforma_moda"])
@@ -184,7 +185,7 @@ def recomendar():
             recomendaciones = recomendar_con_coseno_y_knn(dataset_seleccionado, usuario_ficticio, k=5)
             
             historico_recomendaciones.append({
-                'grupo': len(historico_recomendaciones) + 1,
+                'group_name': group_name,
                 'recomendaciones': recomendaciones
             })
 
