@@ -23,6 +23,13 @@ export const Intro = () => {
           >
             Find your Reko!
           </NavLink>
+
+          <NavLink
+            to="/history"
+            className=" bg-white opacity-50 ml-12 hover:bg-primary-darkpink hover:text-white text-primary-lightpink py-4 px-7 rounded-lg text-3xl font-medium shadow-lg transition duration-300"
+          >
+            View yours Reko!
+          </NavLink>
       </div>
 
     </div>

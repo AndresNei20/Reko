@@ -16,18 +16,21 @@ export const Recommendation = ({ recommendations }) => {
       
       <section className="flex flex-col relative w-full px-32 z-10 mt-24 items-center h-fit">
       <h2 className="flex text-2xl font-light mb-2">Amazing Reko!</h2>
-      <h2 className="flex text-xl font-extralight mb-20">This are the reccomendations for [add group name]</h2>
+      <h2 className="flex text-xl font-extralight mb-16">This are the reccomendations for [add group name]</h2>
 
           {recommendations && recommendations.length > 0 ? (
             <div className="flex w-full space-x-6 items-center justify-center">
               {recommendations.map((rec, index) => (
+                
                 <Movie
                   key={index}
                   title={rec.title}
                   releaseYear={rec.releaseYear}
-                  posterUrl={rec.posterUrl}
-                  rating={rec.rating}
-                  url={rec.url}
+                  rating={rec.imdbAverageRating}
+                  genres={rec.genres}
+                  type={rec.type}
+                  platform={rec.platform}
+                  size={'big'}
                 />
               ))}
             </div>
@@ -37,7 +40,7 @@ export const Recommendation = ({ recommendations }) => {
 
           <button
             onClick={handleHome}
-            className="flex mt-16 items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
+            className="flex mt-12 items-center text-xl px-8 py-2 border-2 border-white text-white rounded-lg  hover:bg-primary-lightpink"
           >
             <img className="w-6 ml-2" src={arrowLeft} alt="" />
             Go back to home

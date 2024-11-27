@@ -1,29 +1,50 @@
 import PropTypes from "prop-types";
 
-export const Movie = ({ title, releaseYear, rating, type, genre, platform }) => {
+export const Movie = ({ title, releaseYear, rating, type, genres, platform, size }) => {
+  const isBig = size === 'big';
+
   return (
-      <section className="flex flex-col items-center">
-        <div className="bg-gray-950 shadow-md rounded-lg px-6 pt-8 flex flex-col items-center text-center w-56 h-80 text-white space-y-6">
-          <h2 className="text-2xl font-medium text-primary-lightpink h-12 flex items-center justify-center">
-            {title}
+    <section className="flex flex-col items-center">
+      <div
+        className={`bg-gray-950 shadow-md rounded-lg px-4 pt-4 flex flex-col items-center text-center text-white space-y-6 ${
+          isBig ? 'w-[260px] h-[360px]' : 'w-[210px] h-[330px]'
+        }`}
+      >
+        <h2 className={`font-medium text-primary-lightpink h-24 flex items-center justify-center ${
+          isBig ? 'text-2xl' : 'text-xl'
+        }`}>
+          {title}
+        </h2>
+
+        <div>
+          <h2 className={`${isBig ? 'text-lg' : 'text-base'} font-extralight`}>
+            {type === 'movie' ? 'Movie' : type === 'tv' ? 'Serie' : 'Movie/Serie'}
           </h2>
-
-          <div>
-            <h2 className="text-base font-extralight">{type || 'Movie/Serie'} 
-            </h2>
-            <p className="text-sm text-gray-500 items-center">{releaseYear}</p>
-          </div>
-          
-          <p className="py-2 text-gray-600 text-3xl flex items-center justify-center">
-            <span className="text-primary-lightpink text-5xl mr-2">{'★'} </span>
-            {rating || "1.5"}
+          <p className={`${isBig ? 'text-base' : 'text-sm'} text-gray-500 items-center`}>
+            {releaseYear}
           </p>
-          <p className="text-base items-center">{genre || 'Genres'}</p>
-
         </div>
-        <h2 className='text-base font-light mt-4 bg-primary-lightpink w-fit py-1 px-3 rounded-full'>{platform || 'Platform'} </h2>
-      </section>
 
+        <p className={`py-2 text-gray-600 flex items-center justify-center ${
+          isBig ? 'text-4xl' : 'text-3xl'
+        }`}>
+          <span className={`text-primary-lightpink mr-2 ${isBig ? 'text-6xl' : 'text-5xl'}`}>
+            {'★'}
+          </span>
+          {rating || '1.5'}
+        </p>
+
+        <p className={`${isBig ? 'text-lg' : 'text-base'} items-center`}>
+          {genres || 'Genres'}
+        </p>
+      </div>
+
+      <h2 className={`font-light mt-4 bg-primary-lightpink w-fit py-1 px-3 rounded-full ${
+        isBig ? 'text-lg' : 'text-base'
+      }`}>
+        {platform || 'Platform'}
+      </h2>
+    </section>
   );
 };
 
@@ -32,6 +53,7 @@ Movie.propTypes = {
   releaseYear: PropTypes.number.isRequired,
   rating: PropTypes.string,
   type: PropTypes.string,
-  genre: PropTypes.string,
+  genres: PropTypes.string,
   platform: PropTypes.string,
+  size: PropTypes.string,
 };
