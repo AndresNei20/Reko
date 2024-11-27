@@ -6,8 +6,8 @@ export const Movie = ({ title, releaseYear, rating, type, genres, platform, size
   return (
     <section className="flex flex-col items-center">
       <div
-        className={`bg-gray-950 shadow-md rounded-lg px-4 pt-4 flex flex-col items-center text-center text-white space-y-6 ${
-          isBig ? 'w-[260px] h-[360px]' : 'w-[210px] h-[330px]'
+        className={`bg-gray-950 shadow-md rounded-lg px-4 pt-4 flex flex-col items-center text-center text-white space-y-6 h-[360px] ${
+          isBig ? 'w-[260px]' : 'w-[210px]'
         }`}
       >
         <h2 className={`font-medium text-primary-lightpink h-24 flex items-center justify-center ${
@@ -34,12 +34,12 @@ export const Movie = ({ title, releaseYear, rating, type, genres, platform, size
           {rating || '1.5'}
         </p>
 
-        <p className={`${isBig ? 'text-lg' : 'text-base'} items-center`}>
+        <p className={`${isBig ? 'text-lg' : 'text-base'} items-center mb-4`}>
           {genres || 'Genres'}
         </p>
       </div>
 
-      <h2 className={`font-light mt-4 bg-primary-lightpink w-fit py-1 px-3 rounded-full ${
+      <h2 className={`font-light mt-4  bg-primary-lightpink w-fit py-1 px-3 rounded-full ${
         isBig ? 'text-lg' : 'text-base'
       }`}>
         {platform || 'Platform'}

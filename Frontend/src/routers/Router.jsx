@@ -5,7 +5,7 @@ import { Recommendation } from '../screens/Recommendation'
 import PropTypes from 'prop-types'
 import { History } from '../screens/History'
 
-export const Router = ({recommendations, setRecommendations}) => {
+export const Router = ({recommendations, setRecommendations, groupname, setGroupname}) => {
   return (
     <BrowserRouter>
 
@@ -14,10 +14,19 @@ export const Router = ({recommendations, setRecommendations}) => {
           <Route path='/' element={<Navigate to='/intro' />} />
           <Route path='/intro' element={<Intro />} />
           <Route path='/questionnaire' 
-            element={<Questionnaire setRecommendations={setRecommendations}/>} 
+            element={
+            <Questionnaire 
+              setRecommendations={setRecommendations}
+              groupname={groupname}
+              setGroupname={setGroupname}
+            />} 
           />
           <Route path='/recommendation' 
-            element={<Recommendation recommendations={recommendations} />}
+            element={
+            <Recommendation 
+              recommendations={recommendations}
+              groupname={groupname}
+            />}
           />
           <Route path='/history' element={<History/>} />
         </Routes>
@@ -30,4 +39,6 @@ export const Router = ({recommendations, setRecommendations}) => {
 Router.propTypes = {
     recommendations: PropTypes.array.isRequired,
     setRecommendations: PropTypes.func.isRequired, 
+    groupname: PropTypes.string.isRequired,
+    setGroupname: PropTypes.func.isRequired
 }

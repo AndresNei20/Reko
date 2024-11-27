@@ -13,9 +13,8 @@ import PropTypes from 'prop-types';
 import { UserList } from "../components/UsersList";
 
 
-export const Questionnaire = ({ setRecommendations }) => {
+export const Questionnaire = ({ setRecommendations, groupname, setGroupname }) => {
   const [error, setError] = useState('');
-  const [groupname, setGroupname] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [responses, setResponses] = useState([
     {
@@ -103,12 +102,11 @@ export const Questionnaire = ({ setRecommendations }) => {
     if (!validateResponses()) return;
     console.log('in submit');
     
-    try {     
-
+    try {
       const response = await fetch("http://localhost:5000/recomendar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ group_name: groupname,respuestas: responses }),
+        body: JSON.stringify({ group_name: groupname, respuestas: responses }),
       });
       const data = await response.json();
       setRecommendations(data.recomendaciones);
@@ -233,5 +231,7 @@ export const Questionnaire = ({ setRecommendations }) => {
 };
 
 Questionnaire.propTypes = {
-  setRecommendations: PropTypes.func.isRequired
+  setRecommendations: PropTypes.func.isRequired,
+  groupname: PropTypes.string.isRequired,
+  setGroupname: PropTypes.func.isRequired
 };

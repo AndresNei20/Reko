@@ -4,7 +4,7 @@ import fondo from '../assets/Fondo.png'
 import arrowLeft from '../assets/arrow-left.png'
 import { useNavigate } from "react-router-dom";
 
-export const Recommendation = ({ recommendations }) => {
+export const Recommendation = ({ recommendations, groupname }) => {
   const navigate = useNavigate()
   const handleHome = () => {
     navigate('/intro')
@@ -16,7 +16,7 @@ export const Recommendation = ({ recommendations }) => {
       
       <section className="flex flex-col relative w-full px-32 z-10 mt-24 items-center h-fit">
       <h2 className="flex text-2xl font-light mb-2">Amazing Reko!</h2>
-      <h2 className="flex text-xl font-extralight mb-16">This are the reccomendations for [add group name]</h2>
+      <h2 className="flex text-xl font-extralight mb-16">This are the reccomendations for {groupname} </h2>
 
           {recommendations && recommendations.length > 0 ? (
             <div className="flex w-full space-x-6 items-center justify-center">
@@ -62,4 +62,5 @@ Recommendation.propTypes = {
       url: PropTypes.string,
     })
   ).isRequired,
+  groupname: PropTypes.string.isRequired
 };
