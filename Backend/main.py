@@ -43,10 +43,21 @@ def generar_usuario_ficticio(respuestas):
         
         # Obtener el formato más frecuente
         formatos = [r["formato"] for r in respuestas if r["formato"]]
-        if not formatos:
-            raise ValueError("No se proporcionaron formatos válidos.")
         
-        formato = max(set(formatos), key=formatos.count)
+        # Verificar si el grupo es par e incluye solo "ambos"
+        if len(respuestas) % 2 == 0:
+            # Verificar si todos eligieron ambos formatos
+            todos_eligieron_ambos = all("movie" in f and "tv" in f for f in formatos)
+            if todos_eligieron_ambos:
+                formato = ["movie", "tv"]  # Usar todos los formatos
+            else:
+                # Aplanar la lista de listas de formatos
+                formatos_flat = [fmt for f in formatos for fmt in f]
+                formato = [Counter(formatos_flat).most_common(1)[0][0]]
+        else:
+            # Si es impar, usa la lógica actual de la moda
+            formatos_flat = [fmt for f in formatos for fmt in f]
+            formato = [Counter(formatos_flat).most_common(1)[0][0]]
 
         # Calcular la calificación mínima promedio
         calificaciones = [r["calificacion_minima"] for r in respuestas if isinstance(r["calificacion_minima"], (int, float))]
@@ -81,8 +92,6 @@ def generar_usuario_ficticio(respuestas):
     except Exception as e:
         print(f"Error al generar el usuario ficticio: {e}")
         return {"error": str(e)}
-
-
 
 # Función para cargar dataset basado en la plataforma moda
 def cargar_dataset_por_plataforma(plataforma):
@@ -122,8 +131,8 @@ def recomendar_con_coseno_y_knn(dataset, usuario_ficticio, k=10):
     dataset = preparar_datos_para_vectorizacion(dataset)
 
     # Filtrar dataset según las preferencias del usuario ficticio
-    dataset_filtrado = dataset[
-        (dataset['type'] == usuario_ficticio['formato']) &
+    dataset_filtrado = dataset[ 
+        (dataset['type'].isin(usuario_ficticio['formato'])) &  # Verificar lista de formatos
         (dataset['imdbAverageRating'] >= usuario_ficticio['calificacion_minima']) &
         (dataset['releaseYear'] >= usuario_ficticio['rango_anios'][0]) &
         (dataset['releaseYear'] <= usuario_ficticio['rango_anios'][1])
@@ -143,7 +152,7 @@ def recomendar_con_coseno_y_knn(dataset, usuario_ficticio, k=10):
 
     user_preferences = (
       ' '.join(usuario_ficticio['generos']) + ' ' +
-      usuario_ficticio['formato'] + ' ' +
+      ' '.join(usuario_ficticio['formato']) + ' ' +  # Ahora es una lista, asegurando que se añadan todos los formatos
       ' '.join([str(año) for año in range(int(usuario_ficticio['rango_anios'][0]), int(usuario_ficticio['rango_anios'][1]) + 1)])
     )
 
@@ -199,7 +208,6 @@ def recomendar():
 @app.route('/historial', methods=['GET'])
 def obtener_historico_recomendaciones():
     return jsonify({'historico_recomendaciones': historico_recomendaciones})
-
 
 # Iniciar servidor
 if __name__ == '__main__':

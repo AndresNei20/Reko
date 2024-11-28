@@ -20,7 +20,7 @@ export const Questionnaire = ({ setRecommendations, groupname, setGroupname }) =
     {
       plataformas: [],
       generos: [],
-      formato: "",
+      formato: [], // Ahora es un arreglo, ajustado al nuevo formato
       calificacion_minima: "",
       rango_anios: { desde: "", hasta: "" },
     },
@@ -29,7 +29,6 @@ export const Questionnaire = ({ setRecommendations, groupname, setGroupname }) =
   console.log('group', groupname);
   
 
-  
   const [activeResponseIndex, setActiveResponseIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -64,6 +63,8 @@ export const Questionnaire = ({ setRecommendations, groupname, setGroupname }) =
 
   const validateResponses = () => {
     const activeResponse = responses[activeResponseIndex];
+    console.log('Active Response:', activeResponse);
+
     // Validar solo el usuario seleccionado
     if (activeResponse.plataformas.length === 0) {
       setError("Debes seleccionar al menos una plataforma");
@@ -73,7 +74,8 @@ export const Questionnaire = ({ setRecommendations, groupname, setGroupname }) =
       setError('El campo "Géneros" no puede estar vacío');
       return false;
     }
-    if (!activeResponse.formato.trim()) {
+    // Validar que el formato no esté vacío (es un arreglo en el nuevo formato)
+    if (!Array.isArray(activeResponse.formato) || activeResponse.formato.length === 0) {
       setError('El campo "Formato" no puede estar vacío');
       return false;
     }
@@ -123,7 +125,7 @@ export const Questionnaire = ({ setRecommendations, groupname, setGroupname }) =
       {
         plataformas: [],
         generos: [],
-        formato: "",
+        formato: [], // Inicializado como arreglo vacío
         calificacion_minima: "",
         rango_anios: { desde: "", hasta: "" },
       },
