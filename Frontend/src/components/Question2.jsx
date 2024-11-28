@@ -31,7 +31,7 @@ export const Question2 = ({ responses, onChange }) => {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <h2 className="text-2xl font-light mb-2">Select your favorite genres</h2>
-      <h2 className="text-xl font-extralight mb-20">
+      <h2 className="text-xl font-extralight mb-6">
         You can select one or more genres
       </h2>
       <div className="w-[90%] max-w-[800px]"> 

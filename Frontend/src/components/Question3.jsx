@@ -10,7 +10,7 @@ export const Question3 = ({ responses, onChange }) => {
 return (
   <div className="flex flex-col w-full items-center justify-center">
     <h2 className="flex text-2xl font-light mb-2">Select your favorite format(s)</h2>
-    <h2 className="flex text-xl font-extralight mb-20">You can select one or both</h2>
+    <h2 className="flex text-xl font-extralight mb-6">You can select one or both</h2>
     <div className="flex items-center space-x-24">
       {options.map((option) => (
         <CheckboxImage

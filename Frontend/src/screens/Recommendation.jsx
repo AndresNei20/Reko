@@ -14,7 +14,7 @@ export const Recommendation = ({ recommendations, groupname }) => {
 
       <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${fondo})` }}></div>
       
-      <section className="flex flex-col relative w-full px-32 z-10 mt-24 items-center h-fit">
+      <section className="flex flex-col relative w-full px-32 z-10 mt-12 items-center h-fit">
       <h2 className="flex text-2xl font-light mb-2">Amazing Reko!</h2>
       <h2 className="flex text-xl font-extralight mb-16">This are the reccomendations for {groupname} </h2>
 

@@ -26,14 +26,14 @@ export const History = () => {
   console.log("soy el console log :)", groups);
 
   return (
-    <div className="flex flex-col w-full h-full items-center justify-start min-h-screen text-white">
+    <div className="flex flex-col w-full min-h-screen items-center justify-center text-white">
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0"
         style={{ backgroundImage: `url(${fondo})` }}
       ></div>
 
       {groups.length != [] ? (
-        <section className="flex flex-row relative w-full px-24 z-10 mt-12 items-center h-fit">
+        <section className="flex flex-row relative w-full px-24 z-10 items-center justify-center h-fit">
           <GroupsList
             groups={groups}
             selectedGroup={selectedGroup}

@@ -8,9 +8,9 @@ export const Intro = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style={{ backgroundImage: `url(${portada})` }}></div>
 
 
-      <div className="relative z-10 items-start mt-40 ml-28 w-[660px] h-fit">
+      <div className="relative z-10 items-start mt-32 ml-28 w-[600px] h-fit">
         <img className="w-full" src={logo} alt="" />
-        <h1 className="text-5xl font-bold mb-4">
+        <h1 className="text-4xl font-bold mb-4">
           Find the perfect movie to enjoy with your friends!
         </h1>
         <h2 className="text-xl md:text-2xl mb-24 text-white-300">
@@ -19,16 +19,16 @@ export const Intro = () => {
       
           <NavLink
             to="/questionnaire"
-            className=" bg-primary-lightpink hover:bg-primary-darkpink text-white py-4 px-7 rounded-lg text-3xl font-medium shadow-lg transition duration-300"
+            className=" bg-primary-lightpink hover:bg-primary-darkpink text-white py-3 px-5 rounded-lg text-3xl font-medium shadow-lg transition duration-300"
           >
             Find your Reko!
           </NavLink>
 
           <NavLink
             to="/history"
-            className=" bg-white opacity-50 ml-12 hover:bg-primary-darkpink hover:text-white text-primary-lightpink py-4 px-7 rounded-lg text-3xl font-medium shadow-lg transition duration-300"
+            className=" bg-white opacity-50 ml-12 hover:bg-primary-darkpink hover:text-white text-primary-lightpink py-3 px-5 rounded-lg text-3xl font-medium shadow-lg transition duration-300"
           >
-            View yours Reko!
+            View your Reko!
           </NavLink>
       </div>
 

@@ -6,12 +6,12 @@ export const Movie = ({ title, releaseYear, rating, type, genres, platform, size
   return (
     <section className="flex flex-col items-center">
       <div
-        className={`bg-gray-950 shadow-md rounded-lg px-4 pt-4 flex flex-col items-center text-center text-white space-y-6 h-[360px] ${
-          isBig ? 'w-[260px]' : 'w-[210px]'
+        className={`bg-gray-950 shadow-md rounded-lg px-4 pt-4 flex flex-col items-center text-center text-white  h-[360px] ${
+          isBig ? 'w-[230px] space-y-4' : 'w-[185px] h-[318px] space-y-4'
         }`}
       >
-        <h2 className={`font-medium text-primary-lightpink h-24 flex items-center justify-center ${
-          isBig ? 'text-2xl' : 'text-xl'
+        <h2 className={`font-medium text-primary-lightpink  flex items-center justify-center ${
+          isBig ? 'text-2xl h-24' : 'text-xl h-20'
         }`}>
           {title}
         </h2>

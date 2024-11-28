@@ -27,8 +27,8 @@ export const GroupsList = ({ groups, selectedGroup, setSelectedGroup}) => {
   
 
   return (
-    <div className="flex flex-col w-[250px] h-[46rem] pb-10 pt-5 px-2 items-center bg-gray-950 rounded-lg">
-      <img className="w-16 mb-5 self-center" src={dots} />
+    <div className="flex flex-col w-[220px] h-[40rem] px-2 items-center bg-gray-950 rounded-lg">
+      <img className="w-16 mb-5 mt-6 self-center" src={dots} />
       <h2 className="text-2xl font-light mb-2">Groups</h2>
       <div className="flex flex-col items-center justify-start overflow-y-auto max-h-[40rem] w-full hide-scrollbar pt-4">
         {groups.map((group, index) => (
