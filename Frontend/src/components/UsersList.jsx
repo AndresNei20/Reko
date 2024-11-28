@@ -43,7 +43,7 @@ export const UserList = ({responses, activeResponseIndex, handleSelectResponse, 
 
 
   return (
-    <div className="flex flex-col w-[250px] h-[46rem] mt-4 pb-10 pt-5 px-2 items-start bg-gray-950 rounded-lg">
+    <div className="flex flex-col w-[220px] h-[40rem] mt-4 pb-10 pt-5 px-2 items-start bg-gray-950 rounded-lg">
       <img className="w-16 mb-5 self-center" src={dots} />
       <input
         type="text"
